@@ -17,10 +17,10 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    getTodo();
+    showTodo();
   }
 
-  getTodo() async {
+  showTodo() async {
     var url = 'https://jsonplaceholder.typicode.com/todos';
     var response = await http.get(Uri.parse(url));
 
@@ -29,7 +29,7 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  deleteTodo() async {
+  removeTodo() async {
     var url =
     Uri.parse("https://jsonplaceholder.typicode.com/todos/id%22");
         var response = await http.delete(url);
@@ -45,27 +45,31 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text('API'),
+          title: const Text('Http Get and Delete'),
         ),
       body: Center(
-        child:  ListView.builder(
-                itemCount: todo.length,
-                itemBuilder: (context,index){
-                  return Dismissible(
-                    key: UniqueKey(),
-                    onDismissed: (direction){
-                      setState(() {
-                        todo.removeAt(index);
-                        deleteTodo();
-                      });
-                    },
-                    child: ListTile(
-                      title: Text(todo[index]['title']),
-                      ),
-                    );
+        child: ListView.builder(
+          padding: const EdgeInsets.all(8),
+          itemCount: todo.length,
+          itemBuilder: (context,index){
+            return Dismissible(
+              key: UniqueKey(),
+              onDismissed: (direction){
+                setState(() {
+                  todo.removeAt(index);
+                  removeTodo();
+                });
                 },
-        ),
-      ),
+              child: Card(
+                elevation:4,
+                child: ListTile
+                  (title: Text(todo[index]['title'])
+                ),
+              ),
+            );
+           }
+           )
+      )
     );
   }
 }
