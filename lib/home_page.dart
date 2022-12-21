@@ -23,7 +23,6 @@ class _HomePageState extends State<HomePage> {
   showTodo() async {
     var url = 'https://jsonplaceholder.typicode.com/todos';
     var response = await http.get(Uri.parse(url));
-
     setState(() {
       todo = convert.jsonDecode(response.body) as List<dynamic>;
     });
