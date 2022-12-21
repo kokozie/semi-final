@@ -34,6 +34,7 @@ class _HomePageState extends State<HomePage> {
     Uri.parse("https://jsonplaceholder.typicode.com/todos/id%22");
         var response = await http.delete(url);
     if (response.statusCode == 200){
+      // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Deleted Successfully'))
       );
@@ -50,7 +51,6 @@ class _HomePageState extends State<HomePage> {
         child:  ListView.builder(
                 itemCount: todo.length,
                 itemBuilder: (context,index){
-                  final todos = todo[index];
                   return Dismissible(
                     key: UniqueKey(),
                     onDismissed: (direction){
