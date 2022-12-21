@@ -58,8 +58,6 @@ class _HomePageState extends State<HomePage> {
                         todo.removeAt(index);
                         deleteTodo();
                       });
-                      ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('Todo Deleted!')));
                     },
                     child: ListTile(
                       title: Text(todo[index]['title']),
